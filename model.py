@@ -106,6 +106,9 @@ model.add(Dense(128))
 model.add(Dense(84))
 model.add(Dense(1))
 
+# from keras.utils import plot_model
+# plot_model(model, to_file='model.png', show_shapes=True)
+
 ## Print the model architecture summary
 print(model.summary())
 
