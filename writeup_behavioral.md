@@ -78,27 +78,23 @@ I tried to create the training data for different scenarios, but due to the fram
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+Initially I started with normal convolutional layer, flatten and dense layer as shown in the lectures. I found out that the car would always keep the steering in either left or right direction and go around in circles.
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+Later, I add normalization, cropping layer and some more conv and dense layers, it worked a bit better but still not within the lane.
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+Then I tried the nvidia architecture mentioned in Lecture 15. and used the provided training data set instead. Initial run, I was able to get good result, although it was going off track when the lane was replaced with dirt part i.e., towards the end of the lap.
 
-To combat the overfitting, I modified the model so that ...
+I then tweaked the model and added some more dense layers and increased the epoch upto 25 and finally my model was able to complete the whole lap without going off track :) It works well for Track 1. Track 2 is a bit challenging and I am unable to create a proper training set from within the simulator, even in the lowest graphic setting. Maybe it the browser or my laptop. Not sure about it though.
 
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
+At the end of the process, the vehicle is able to drive autonomously around the track 1 without leaving the road.
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture (model.py lines 84-107) consisted of a convolution neural network with the following layers and layer sizes as shown in the image below.
 
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+Here is a visualization of the architecture.
 
-![alt text][image1]
+![Model architecture](./model.png)
 
 #### 3. Creation of the Training Set & Training Process
 
