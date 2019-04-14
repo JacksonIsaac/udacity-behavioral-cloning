@@ -1,9 +1,5 @@
 # **Behavioral Cloning** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
 ---
 
 **Behavioral Cloning Project**
@@ -37,13 +33,13 @@ The goals / steps of this project are the following:
 My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
-* model.h5 containing a trained convolution neural network 
-* writeup_report.md or writeup_report.pdf summarizing the results
+* model_nvidia_arch_run2.h5 containing a trained convolution neural network 
+* writeup_behavioral.md summarizing the results
 
 #### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
-python drive.py model.h5
+python drive.py model_nvidia_arch_run2.h5
 ```
 
 #### 3. Submission code is usable and readable
@@ -54,9 +50,15 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+The model I have used for training is inspired from [Nvidia's blog](https://devblogs.nvidia.com/deep-learning-self-driving-cars/) and architecture discussed in Lecture 15. Even More Powerful Networks.
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
+My model consists of 5 convolutional layers with 5x5 and 3x3 filter sizes and depths upto 64. It is then Flatten into 1D and 7 Dense layers are applied to get the steering angle output.
+
+Before passing the image to the convolutional layer, it is first normalized and then cropped to get the region of interest.
+
+The convolutional layers use RELU as activation function to introduce non-linearity. There is no dropout used, same as the one used by nvidia. The model works really well and the car is able to stay on track for the complete lap.
+
+The video can be found [here](./nvidia_run2.mp4)
 
 #### 2. Attempts to reduce overfitting in the model
 
