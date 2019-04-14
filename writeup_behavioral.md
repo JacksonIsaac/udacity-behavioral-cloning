@@ -84,7 +84,7 @@ Later, I add normalization, cropping layer and some more conv and dense layers, 
 
 Then I tried the nvidia architecture mentioned in Lecture 15. and used the provided training data set instead. Initial run, I was able to get good result, although it was going off track when the lane was replaced with dirt part i.e., towards the end of the lap.
 
-I then tweaked the model and added some more dense layers and increased the epoch upto 25 and finally my model was able to complete the whole lap without going off track :) It works well for Track 1. Track 2 is a bit challenging and I am unable to create a proper training set from within the simulator, even in the lowest graphic setting. Maybe it the browser or my laptop. Not sure about it though.
+I then tweaked the model and added some more dense layers and increased the epoch upto 25 and finally my model was able to complete the whole lap without going off track :) It works well for Track 1. Track 2 is a bit challenging and I am unable to create a proper training set from within the simulator, even in the lowest graphic setting. Maybe it the browser or my laptop.
 
 At the end of the process, the vehicle is able to drive autonomously around the track 1 without leaving the road.
 
@@ -98,28 +98,14 @@ Here is a visualization of the architecture.
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+I tried to create a custom training set but due to frame rate issue, I was unable to create a proper train set. It was either too much steering or off track sometimes. Hence, I decided to use the provided data set for training.
 
-![alt text][image2]
+I used scikit learn's split function to split data set into training and validation sample set. I made use of generators to create batch samples. This helps in running a large neural network on a big data set.
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+Also, to augment the data sat, I flipped the images using opencv flip() function and multiplied the angles with -1. This is done inorder to remove bias towards left turn, since the lap has mostly left turns only and the model learns to take only left turns.
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+Before feeding the data into the model, I have used normalization and cropping of image to remove the sky, trees, etc. on top and the hood of the car from the bottom.
 
-Then I repeated this process on track two in order to get more data points.
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
-
-
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. I tried upto 25 epochs and noticed that in some cases it overfits on training data and performs bad on validation set. I found out that the ideal number of epochs was 5. I used an adam optimizer so that manually training the learning rate wasn't necessary.
