@@ -62,19 +62,17 @@ The video can be found [here](./nvidia_run2.mp4)
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
+In order to reduce overfitting i.e., always turning left, since the Track 1 consists of majorly left turns, I have used opencv's flip() to create right turn samples and along with that corresponding steering angle is multiplied by -1.
 
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
+The model uses an adam optimizer, so the learning rate was not tuned manually.
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
-
-For details about how I created the training data, see the next section. 
+I tried to create the training data for different scenarios, but due to the frame rate of the simulator in browser I was unable to create a good training data set. Hence, I used the Udacity provided data set for training the model, which works really well for Track 1 autonomous driving.
 
 ### Model Architecture and Training Strategy
 
